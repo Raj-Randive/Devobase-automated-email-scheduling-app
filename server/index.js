@@ -1,9 +1,11 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const config = require("./config/index.config.js");
-const dbConnect = require("./connect/db.js");
+import express from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import config from "./config/index.config.js";
+import dbConnect from "./connect/db.js";
+import AuthRoutes from "./routes/auth.routes.js";
+import emailRoutes from "./routes/email.routes.js";
 
 const app = express();
 
@@ -17,8 +19,8 @@ app.use(cookieParser());
 dbConnect();
 
 // Routes
-// app.use("/api/auth", AuthRoutes);
-// app.use("/api/emails", emailRoutes);
+app.use("/api/auth", AuthRoutes);
+app.use("/api/emails", emailRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");

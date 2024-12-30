@@ -1,4 +1,5 @@
-require('dotenv').config({path: "./.env"})
+import dotenv from 'dotenv';
+dotenv.config({path: "./.env"});
 
 const PORT                        = process.env.PORT || 5111;
 
@@ -14,7 +15,7 @@ if(!JWT_SECRET || !PORT || !MONGO_URI){
     throw Error('missing .env variables check index.config');
 }
 
-config = {
+const config = {
     PORT,
     MONGO_URI,
     JWT_SECRET,
@@ -23,4 +24,4 @@ config = {
     REDIS_HOST
 }
 
-module.exports = config;
+export default config;

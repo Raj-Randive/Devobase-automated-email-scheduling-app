@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const config = require("../config/index.config.js");
+import mongoose from "mongoose";
+import config from "../config/index.config.js";
 
 const dbConnect = async () => {
   await mongoose
@@ -8,4 +8,4 @@ const dbConnect = async () => {
     .catch((err) => console.error("MongoDB connection error:", err));
 };
 
-module.exports = dbConnect;
+export default dbConnect;
