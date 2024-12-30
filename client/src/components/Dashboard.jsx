@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [emails, setEmails] = useState([]);
-  const [newEmail, setNewEmail] = useState({ recipient: "", subject: "", body: "", scheduleTime: "" });
+  const [newEmail, setNewEmail] = useState({
+    recipient: "",
+    subject: "",
+    body: "",
+    scheduleTime: "",
+    recurrence: "none", // Set recurrence to 'none'
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +26,7 @@ const Dashboard = () => {
     try {
       await axios.post("http://localhost:3002/api/emails/schedule-email", newEmail);
       setEmails([...emails, newEmail]);
-      setNewEmail({ recipient: "", subject: "", body: "", scheduleTime: "" });
+      setNewEmail({ recipient: "", subject: "", body: "", scheduleTime: "", recurrence: "none" });
     } catch (error) {
       console.error("Error scheduling email:", error);
     }
