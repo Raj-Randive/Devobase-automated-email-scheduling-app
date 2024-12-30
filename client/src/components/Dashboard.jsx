@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchEmails = async () => {
-      const response = await axios.get("http://localhost:3002/api/emails/scheduled-emails");
+      const response = await axios.get("https://devobase-automated-email-scheduling-api.vercel.app/api/emails/scheduled-emails");
       setEmails(response.data);
     };
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   const handleScheduleEmail = async () => {
     try {
-      await axios.post("http://localhost:3002/api/emails/schedule-email", newEmail);
+      await axios.post("https://devobase-automated-email-scheduling-api.vercel.app/api/emails/schedule-email", newEmail);
       setEmails([...emails, newEmail]);
       setNewEmail({ recipient: "", subject: "", body: "", scheduleTime: "", recurrence: "none" });
     } catch (error) {
@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   const handleCancelEmail = async (id) => {
     try {
-      await axios.delete(`http://localhost:3002/api/emails/scheduled-emails/${id}`);
+      await axios.delete(`https://devobase-automated-email-scheduling-api.vercel.app/api/emails/scheduled-emails/${id}`);
       setEmails(emails.filter(email => email._id !== id));
     } catch (error) {
       console.error("Error canceling email:", error);

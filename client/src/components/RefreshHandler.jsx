@@ -12,7 +12,7 @@ const RefreshHandler = ({ setIsAuthenticated }) => {
     }
   }, [setIsAuthenticated, navigate]);
 
-  return null; // This component doesn't render anything visible.
+  return null;
 };
 
 export default RefreshHandler;

@@ -9,7 +9,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:3002/api/auth/login", {
+      const response = await axios.post("https://devobase-automated-email-scheduling-api.vercel.app/api/auth/login", {
         email,
         password,
       });

@@ -11,7 +11,7 @@ const Register = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post("http://localhost:3002/api/auth/register", {
+      const response = await axios.post("https://devobase-automated-email-scheduling-api.vercel.app/api/auth/register", {
         userName,
         email,
         password,
