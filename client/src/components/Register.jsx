@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "./Loading";
 
 const Register = () => {
   const [userName, setUserName] = useState("");
@@ -8,8 +9,10 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
+    setLoading(true);
     try {
       const response = await axios.post("https://devobase-automated-email-scheduling-api.vercel.app/api/auth/register", {
         userName,
@@ -19,14 +22,20 @@ const Register = () => {
 
       if (response.status === 200) {
         // On success, redirect to login or dashboard
-        console.log(response.data.message);  // Can show success message
-        navigate("/login");  // Redirect to login page after successful registration
+        console.log(response.data.message);
+        navigate("/login");
       }
     } catch (error) {
       console.error("Error during registration: ", error.response?.data?.message || error.message);
       setError(error.response?.data?.message || "Error during registration");
+    }finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex justify-center items-center h-screen">

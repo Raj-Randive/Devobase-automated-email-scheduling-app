@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import LoadingPage from "./Loading";
 
 const Login = ({ setIsAuthenticated }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
+    setLoading(true);
+
     try {
       const response = await axios.post("https://devobase-automated-email-scheduling-api.vercel.app/api/auth/login", {
         email,
@@ -18,8 +22,14 @@ const Login = ({ setIsAuthenticated }) => {
       navigate("/dashboard");
     } catch (error) {
       console.error("Error during login:", error);
+    }finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
